@@ -3,25 +3,20 @@ name: Build Documentation using MkDocs
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
-  push:
-    branches: [master]
+  release:
+    types: [released]
 
 jobs:
-  build:
-    name: Build and Deploy Documentation
+  build: Release preview
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Master
-        uses: actions/checkout@v2
-      - name: copy changelog to whatsnew
-        uses: canastro/copy-file-action@master
-        with:
-          source: "CHANGELOG.md"
-          target: "docs/whats-new.md"
-
-      - name: Build and Deploy Documentation using MkDocs
-        uses: mhausenblas/mkdocs-deploy-gh-pages@master
+      - uses: actions/checkout@v2
+      - name: Set output
+        id: vars
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+      - name: Check output
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REQUIREMENTS: mkdocs-requirements.txt
+          RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
+        run: |
+          echo $RELEASE_VERSION
+          echo ${{ steps.vars.outputs.tag }}
