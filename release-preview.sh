@@ -17,5 +17,4 @@ mv dist/tangerine-client ../../app
 cd ../../
 rm -rf tmp
 npm version $VERSION
-npm publish
 cd ../
