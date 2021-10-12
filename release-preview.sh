@@ -6,7 +6,7 @@ VERSION=$1
 echo "Building for $VERSION"
 cd tangerine-preview
 npm install
-git clone git@github.com:rjsteinert/rjsteinert-publish-tangerine-preview-test tmp
+git clone https://github.com/rjsteinert/rjsteinert-publish-tangerine-preview-test tmp
 cd tmp 
 git checkout $VERSION
 cd client
