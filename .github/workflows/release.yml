@@ -12,4 +12,6 @@ jobs:
       - name: Test
         run: |
           echo $RELEASE_VERSION
-          echo ${{ env.RELEASE_VERSION }}
+          ./release-preview.sh ${{ env.RELEASE_VERSION }}
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
