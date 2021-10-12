@@ -1,7 +1,7 @@
 name: release
 on:
   release:
-    type: [release]
+    type: [released]
 jobs:
   test:
     runs-on: ubuntu-latest
